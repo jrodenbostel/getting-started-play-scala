@@ -1,0 +1,17 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET        /                    controllers.Application.index
+GET        /cleanup             controllers.Application.cleanup
+
+#Widgets
+GET        /api/widgets         controllers.Widgets.index
+GET        /api/widget/:id      controllers.Widgets.read(id: String)
+POST       /api/widget          controllers.Widgets.create
+DELETE     /api/widget/:id      controllers.Widgets.delete(id: String)
+PATCH      /api/widget/:id      controllers.Widgets.update(id: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
