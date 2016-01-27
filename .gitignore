@@ -3,7 +3,8 @@ target
 /.idea
 /.idea_modules
 /.classpath
-/project
+/project/project
+/project/target
 /.settings
 /.sbtserver
 /RUNNING_PID
