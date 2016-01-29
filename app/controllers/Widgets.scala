@@ -31,7 +31,7 @@ class Widgets @Inject()(val reactiveMongoApi: ReactiveMongoApi) extends Controll
   }
 
   def read(id: String) = Action.async { implicit request =>
-    widgetRepo.select(id).map(widget => Ok(Json.toJson(widget)))
+    widgetRepo.select(BSONDocument(Id -> BSONObjectID(id))).map(widget => Ok(Json.toJson(widget)))
   }
 
   def update(id: String) = Action.async(BodyParsers.parse.json) { implicit request =>

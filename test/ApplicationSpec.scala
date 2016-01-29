@@ -78,12 +78,12 @@ class ApplicationSpec extends Specification with Results with Mockito {
 
     "Recipes#read" should {
       "read recipe" in {
-        mockRecipeRepo.select(any[String])(any[ExecutionContext]) returns Future(Option(widgetOne))
+        mockRecipeRepo.select(any[BSONDocument])(any[ExecutionContext]) returns Future(Option(widgetOne))
 
         val result: Future[Result] = controller.read(documentId).apply(FakeRequest())
 
         contentAsJson(result) must be equalTo widgetOne
-        there was one(mockRecipeRepo).select(any[String])(any[ExecutionContext])
+        there was one(mockRecipeRepo).select(any[BSONDocument])(any[ExecutionContext])
       }
     }
 

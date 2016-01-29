@@ -15,7 +15,7 @@ import scala.concurrent.{ExecutionContext, Future}
 trait WidgetRepo {
   def find()(implicit ec: ExecutionContext): Future[List[JsObject]]
 
-  def select(id: String)(implicit ec: ExecutionContext): Future[Option[JsObject]]
+  def select(selector: BSONDocument)(implicit ec: ExecutionContext): Future[Option[JsObject]]
 
   def update(selector: BSONDocument, update: BSONDocument)(implicit ec: ExecutionContext): Future[WriteResult]
 
@@ -34,8 +34,8 @@ class WidgetRepoImpl @Inject()(reactiveMongoApi: ReactiveMongoApi) extends Widge
     cursor.collect[List]()
   }
 
-  override def select(id: String)(implicit ec: ExecutionContext): Future[Option[JsObject]] = {
-    collection.find(BSONDocument("_id" -> id)).one[JsObject]
+  override def select(selector: BSONDocument)(implicit ec: ExecutionContext): Future[Option[JsObject]] = {
+    collection.find(selector).one[JsObject]
   }
 
   override def update(selector: BSONDocument, update: BSONDocument)(implicit ec: ExecutionContext): Future[WriteResult] = {
